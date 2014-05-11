@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-05-11 08:58:10
+<?php /* Smarty version Smarty-3.1.18, created on 2014-05-11 14:57:18
          compiled from "./templates/create.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:338402269536e71ea99eaf5-07853752%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ade51b064c166bfc6cce06f12c20ce3ffb268155' => 
     array (
       0 => './templates/create.tpl',
-      1 => 1399747092,
+      1 => 1399813034,
       2 => 'file',
     ),
   ),
@@ -21,9 +21,21 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_536e71ea9cac57_49350325')) {function content_536e71ea9cac57_49350325($_smarty_tpl) {?><html>
 <head>
-<title>Smartyのテスト</title>
+<title>アンケート作成</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="action.js"></script>
 </head>
 <body>
-Hello
+<br />
+<h1>アンケートを作ります</h1>
+<br />
+<form action="dataView.php" method="post">
+	アンケートの名前を入力してください : <input type="text" name="name" /><br />
+	<div id="q1"></div><br />
+	<input type="button" value="質問を追加する" onclick="addQuestionDiv();"><br />
+	<br />
+	<input type="submit" value="送信" />
+</form>
+
 </body>
 </html><?php }} ?>
