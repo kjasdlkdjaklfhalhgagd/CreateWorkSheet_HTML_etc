@@ -11,7 +11,7 @@
 <form action="dataView.php" method="post">
 	アンケートの名前を入力してください : <input type="text" name="name" /><br />
 	<div id="q1"></div><br />
-	<input type="button" value="質問を追加する" onclick="addQuestionDiv();">
+	<input type="button" value="質問を追加する" onclick="addQuestionDiv();" />
 	<input type="button" value="最後の質問を削除" onclick="killQuestionDiv();" /><br />
 	<br />
 	<input type="submit" value="送信" />

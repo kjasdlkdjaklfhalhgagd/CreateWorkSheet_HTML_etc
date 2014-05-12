@@ -59,20 +59,60 @@ function changSelect(selectBox)
  */
 function viewCheckBoxField(idName)
 {
-	var html = "<div>"+
-			   "チェックボックスの数 : <input type='text' name='checkBoxNum' value='4' size='1' maxlength='2' onKeyPress='return checkEnter(event);' />"+
-			   "<input type='button' value='表示する' onclick='alert('a');' />"+
-			   "<div id=''></div>"+
-			   "</div>";
+	// idNameから#qTypeを削除したもの数値に
+	var idNum = parseInt(idName.replace(/#qType/g,""));
+	var html = '<div>'+
+			   'チェックボックスの数 : <input type="text" id="checkBoxNum'+idNum+'" name="checkBoxNum'+idNum+'" value="4" size="1" maxlength="2" onKeyPress="return checkEnter(event);" />'+
+			   '<input type="button" value="表示する" onclick="viewCheckBoxDetail(&#39'+'checkBoxNum'+idNum+'&#39);" /><br />'+
+			   '<div id="check'+idNum+'"></div>'+
+			   '</div>';
 
 	$(idName).prepend(html).hide().fadeIn("fast");
+	viewCheckBoxDetail("checkBoxNum"+idNum);
+}
+/**
+ * チェックボックスの詳細設定を表示。
+ * @param {string} textFieldName 表示する個数が書いてあるtextのid
+ */
+function viewCheckBoxDetail(textFieldName)
+{
+	// どこに表示するか
+	var idName = "#check"+parseInt(textFieldName.replace(/checkBoxNum/g,""));
+	// 何個表示するか
+	var viewNum = $("#"+textFieldName).val();
+	// 最後に表示するhtml
+	var html = "<div id='checkList'>";
+
+	// もじ表示されていたら削除
+	if(0 < $("#checkList").size())
+	{
+		$("#checkList").remove();
+	}
+
+	for(var i = 1; i <= viewNum; i++)
+	{
+		html += i+'問目 : <input type="text" name="check'+i+'" />';
+		// 五個ごとに改行を挟む
+		if((i % 5) == 0) { html += "<br />" }
+	}
+	$(idName).hide();
+	$(idName).prepend(html).fadeIn("fast");;
 }
 
 /**
- * チェックボックス設定画面を表示。
+ * ラジオボタン設定画面を表示。
  * @param {string} idName 表示する場所のid名	
  */
 function viewRadioButtonField(idName)
+{
+	
+}
+
+/**
+ * ラジオボタンの詳細設定を表示。
+ * @param {string} idName 表示する場所のid名
+ */
+function viewRadioButtonDetail(idName)
 {
 	
 }
@@ -146,14 +186,14 @@ function addQuestion(idName)
 	// idNameから"div # q"を取り除いた物を数値にする = 質問番号
 	var questionNum = parseInt(idName.replace(/div|#|q/g,""));
 
-	var questinHTML = "<br />質問"+questionNum+" : <input type='text' name='q"+questionNum+"'/><br />"+
-					  "質問タイプ : "+
-					  "<select name='qType"+questionNum+"' size='1' onchange='changSelect(this);'>"+
-					  "<option value='1' label='ラジオボックス（どれか1つ回答）'>ラジオボックス（どれか1つ回答）</option>"+
-					  "<option value='2' label='チェックボックス（複数回答）'>チェックボックス（複数回答）</option>"+
-					  "<option value='3' label='自由回答（回答者が書き込む）'>自由回答（回答者が書き込む）</option>"+
-					  "</select><br />"+
-					  "<div id='qType"+questionNum+"'></div>";
+	var questinHTML = '<br />質問'+questionNum+' : <input type="text" name="q'+questionNum+'"/><br />'+
+					  '質問タイプ : '+
+					  '<select name="qType'+questionNum+'" size="1" onchange="changSelect(this);">'+
+					  '<option value="1" label="チェックボックス（複数回答）">チェックボックス（複数回答）</option>'+
+					  '<option value="2" label="ラジオボックス（どれか1つ回答）">ラジオボックス（どれか1つ回答）</option>'+
+					  '<option value="3" label="自由回答（回答者が回答を書き込む）">自由回答（回答者が回答を書き込む）</option>'+
+					  '</select><br />'+
+					  '<div id="qType'+questionNum+'"></div>';
 
 	$(idName).prepend(questinHTML).fadeIn("fast");
 	viewCheckBoxField("#qType"+questionNum);
