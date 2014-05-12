@@ -100,7 +100,7 @@ function viewCheckBoxDetail(textFieldName)
 	for(var i = 1; i <= viewNum; i++)
 	{
 		// <li>の横のリストにしたらさらに良くなるかな？
-		html += i+' : <input type="text" name="check'+i+'" />';
+		html += i+' : <input type="text" name="check'+i+'" onKeyPress="return checkEnter(event);" />';
 		// 五個ごとに改行を挟む
 		if((i % 5) == 0) { html += "<br />" }
 	}
@@ -197,7 +197,7 @@ function addQuestion(idName)
 	// idNameから"div # q"を取り除いた物を数値にする = 質問番号
 	var questionNum = parseInt(idName.replace(/div|#|q/g,""));
 
-	var questinHTML = '<br />質問'+questionNum+' : <input type="text" name="q'+questionNum+'"/><br />'+
+	var questinHTML = '<br />質問'+questionNum+' : <input type="text" name="q'+questionNum+'" onKeyPress="return checkEnter(event);" /><br />'+
 					  '質問タイプ : '+
 					  '<select name="qType'+questionNum+'" size="1" onchange="changSelect(this);">'+
 					  '<option value="1" label="チェックボックス（複数回答）">チェックボックス（複数回答）</option>'+
