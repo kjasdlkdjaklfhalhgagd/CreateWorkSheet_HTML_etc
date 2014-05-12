@@ -14,6 +14,7 @@
 	<input type="button" value="質問を追加する" onclick="addQuestionDiv();"><br />
 	<br />
 	<input type="submit" value="送信" />
+	<input type="button" value="最後の質問を削除" onclick="killQuestionDiv();" />
 </form>
 
 </body>
