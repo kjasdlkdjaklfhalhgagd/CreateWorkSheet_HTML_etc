@@ -31,8 +31,8 @@ function addQuestionDiv()
 			}
 			else
 			{
-				var afterNum = --i;
-				++i;
+				var afterNum = i - 1;
+				// 現在ある最後の質問の要素の後ろに新しく作る
 				$("div#q"+afterNum).after("<div id='q"+i+"'></div>");
 				addQuestion("div#q"+i);
 			}
