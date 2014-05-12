@@ -76,25 +76,36 @@ function viewCheckBoxField(idName)
  */
 function viewCheckBoxDetail(textFieldName)
 {
-	// どこに表示するか
-	var idName = "#check"+parseInt(textFieldName.replace(/checkBoxNum/g,""));
+	// 問題番号
+	var qNum = parseInt(textFieldName.replace(/checkBoxNum/g,""));
+	// 詳細を表示するIdの名前
+	var idName = "#check"+qNum;
 	// 何個表示するか
 	var viewNum = $("#"+textFieldName).val();
 	// 最後に表示するhtml
-	var html = "<div id='checkList'>";
+	var html = "<div id='checkList"+qNum+"'>";
 
-	// もじ表示されていたら削除
-	if(0 < $("#checkList").size())
+	// 0とか入力する人用
+	if(0 == viewNum)
 	{
-		$("#checkList").remove();
+		alert("0以上で入力してください");
+		return false;
+	}
+	// 前のが表示されていたら削除
+	if(0 < $("#checkList"+qNum).size())
+	{
+		$("#checkList"+qNum).remove();
 	}
 
 	for(var i = 1; i <= viewNum; i++)
 	{
-		html += i+'問目 : <input type="text" name="check'+i+'" />';
+		// <li>の横のリストにしたらさらに良くなるかな？
+		html += i+' : <input type="text" name="check'+i+'" />';
 		// 五個ごとに改行を挟む
 		if((i % 5) == 0) { html += "<br />" }
 	}
+	html += "</div>";
+
 	$(idName).hide();
 	$(idName).prepend(html).fadeIn("fast");;
 }
