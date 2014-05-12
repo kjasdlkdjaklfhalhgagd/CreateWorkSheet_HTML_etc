@@ -22,8 +22,13 @@ function addQuestionDiv()
 
 	for(var i = 2; i <= MAX_QUESTION + 1; i++)
 	{
-		// 質問iが無かったら
-		if(!(0 < $("div#q"+i).size()))
+		// 前のクイズdiv要素
+		var afterQDivName = "div#q"+(i - 1);
+		// 次のクイズdiv
+		var nextQDivName = "div#q"+i;
+
+		// 次の質問が無かったら
+		if(!(0 < $(nextQDivName).size()))
 		{
 			if(i == MAX_QUESTION + 1)
 			{
@@ -31,12 +36,15 @@ function addQuestionDiv()
 			}
 			else
 			{
-				var afterNum = i - 1;
 				// 現在ある最後の質問の要素の後ろに新しく作る
-				$("div#q"+afterNum).after("<div id='q"+i+"'></div>");
-				addQuestion("div#q"+i);
+				$(afterQDivName).after("<div id='q"+i+"'></div>");
+
+				// フェードインさせたいので非表示にする
+				$(nextQDivName).hide();
+
+				addQuestion(nextQDivName);
 			}
-			break;
+				break;
 		}
 	}
 }
@@ -63,5 +71,5 @@ function addQuestion(idName)
 	*/
 	var questinHTML = "<br />質問"+questionNum+" : <input type='text' name='q"+questionNum+"'/><br />質問タイプ : <select name='qType' size='1' onchange='changSelect(this);'><option value='1' label='ラジオボックス（どれか1つ回答）'>ラジオボックス（どれか1つ回答）</option><option value='2' label='チェックボックス（複数回答）'>チェックボックス（複数回答）</option><option value='3' label='自由回答（回答者が書き込む）'>自由回答（回答者が書き込む）</option></select>";
 
-	$(idName).prepend(questinHTML);
+	$(idName).prepend(questinHTML).fadeIn("slow");
 }
