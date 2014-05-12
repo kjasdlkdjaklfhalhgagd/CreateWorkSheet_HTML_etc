@@ -85,10 +85,10 @@ function viewCheckBoxDetail(textFieldName)
 	// 最後に表示するhtml
 	var html = "<div id='checkList"+qNum+"'>";
 
-	// 0とか入力する人用
-	if(0 == viewNum)
+	// 0とか1とか入力する人用
+	if(viewNum <= 0 || 1 == viewNum)
 	{
-		alert("0以上で入力してください");
+		alert("1以上を入力してください");
 		return false;
 	}
 	// 前のが表示されていたら削除
