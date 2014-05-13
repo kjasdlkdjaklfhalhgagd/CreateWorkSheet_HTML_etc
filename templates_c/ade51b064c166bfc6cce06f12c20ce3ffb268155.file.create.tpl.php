@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.18, created on 2014-05-12 14:52:30
+<?php /* Smarty version Smarty-3.1.18, created on 2014-05-12 16:45:52
          compiled from "./templates/create.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:338402269536e71ea99eaf5-07853752%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ade51b064c166bfc6cce06f12c20ce3ffb268155' => 
     array (
       0 => './templates/create.tpl',
-      1 => 1399899111,
+      1 => 1399905949,
       2 => 'file',
     ),
   ),
@@ -30,7 +30,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <h1>アンケートを作ります</h1>
 <br />
 <form action="dataView.php" method="post">
-	アンケートの名前を入力してください : <input type="text" name="name" /><br />
+	アンケートの名前を入力してください : <input type="text" name="name" onKeyPress="return checkEnter(event);" /><br />
 	<div id="q1"></div><br />
 	<input type="button" value="質問を追加する" onclick="addQuestionDiv();" />
 	<input type="button" value="最後の質問を削除" onclick="killQuestionDiv();" /><br />

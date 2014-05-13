@@ -9,7 +9,7 @@
 <h1>アンケートを作ります</h1>
 <br />
 <form action="dataView.php" method="post">
-	アンケートの名前を入力してください : <input type="text" name="name" /><br />
+	アンケートの名前を入力してください : <input type="text" name="name" onKeyPress="return checkEnter(event);" /><br />
 	<div id="q1"></div><br />
 	<input type="button" value="質問を追加する" onclick="addQuestionDiv();" />
 	<input type="button" value="最後の質問を削除" onclick="killQuestionDiv();" /><br />
