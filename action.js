@@ -100,7 +100,7 @@ function viewCheckBoxDetail(textFieldName)
 	for(var i = 1; i <= viewNum; i++)
 	{
 		// <li>の横のリストにしたらさらに良くなるかな？
-		html += i+' : <input type="text" name="check'+i+'" onKeyPress="return checkEnter(event);" />';
+		html += i+' : <input type="text" name="q'+qNum+'_check'+i+'" onKeyPress="return checkEnter(event);" />';
 		// 五個ごとに改行を挟む
 		if((i % 5) == 0) { html += "<br />" }
 	}
