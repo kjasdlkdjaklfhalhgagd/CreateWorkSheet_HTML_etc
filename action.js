@@ -100,14 +100,21 @@ function viewCheckBoxDetail(textFieldName)
 	for(var i = 1; i <= viewNum; i++)
 	{
 		// <li>の横のリストにしたらさらに良くなるかな？
-		html += i+' : <input type="text" name="q'+qNum+'_check'+i+'" onKeyPress="return checkEnter(event);" />';
+		if( i < 10 )
+		{
+			html += '0'+i+' : <input type="text" name="q'+qNum+'_check'+i+'" onKeyPress="return checkEnter(event);" />';
+		}
+		else
+		{
+			html += i+' : <input type="text" name="q'+qNum+'_check'+i+'" onKeyPress="return checkEnter(event);" />';
+		}
 		// 五個ごとに改行を挟む
 		if((i % 5) == 0) { html += "<br />" }
 	}
 	html += "</div>";
 
 	$(idName).hide();
-	$(idName).prepend(html).fadeIn("fast");;
+	$(idName).prepend(html).fadeIn("fast");
 }
 
 /**
@@ -116,16 +123,62 @@ function viewCheckBoxDetail(textFieldName)
  */
 function viewRadioButtonField(idName)
 {
-	
+	// idNameから#qTypeを削除したもの数値に
+	var idNum = parseInt(idName.replace(/#qType/g,""));
+	var html = '<div>'+
+			   'ラジオボタンの数 : <input type="text" id="radioNum'+idNum+'" name="radioNum'+idNum+'" value="4" size="1" maxlength="2" onKeyPress="return checkEnter(event);" />'+
+			   '<input type="button" value="表示する" onclick="viewRadioButtonDetail(&#39'+'radioNum'+idNum+'&#39);" /><br />'+
+			   '<div id="radio'+idNum+'"></div>'+
+			   '</div>';
+
+	$(idName).prepend(html).hide().fadeIn("fast");
+	viewRadioButtonDetail("radioNum"+idNum);
 }
 
 /**
  * ラジオボタンの詳細設定を表示。
- * @param {string} idName 表示する場所のid名
+ * @param {string} textFieldName 表示する個数が書いてあるtextのid
  */
-function viewRadioButtonDetail(idName)
+function viewRadioButtonDetail(textFieldName)
 {
-	
+	// 問題番号
+	var qNum = parseInt(textFieldName.replace(/radioNum/g,""));
+	// 詳細を表示するIdの名前
+	var idName = "#radio"+qNum;
+	// 何個表示するか
+	var viewNum = $("#"+textFieldName).val();
+	// 最後に表示するhtml
+	var html = "<div id='radioList"+qNum+"'>";
+
+	// 0とか1とか入力する人用
+	if(viewNum <= 0 || 1 == viewNum)
+	{
+		alert("1以上を入力してください");
+		return false;
+	}
+	// 前のが表示されていたら削除
+	if(0 < $("#radioList"+qNum).size())
+	{
+		$("#radioList"+qNum).remove();
+	}
+
+	for(var i = 1; i <= viewNum; i++)
+	{
+		if( i < 10 )
+		{
+			html += '0'+i+' : <input type="text" name="q'+qNum+'_radio'+i+'" onKeyPress="return checkEnter(event);" />';
+		}
+		else
+		{
+			html += i+' : <input type="text" name="q'+qNum+'_radio'+i+'" onKeyPress="return checkEnter(event);" />';
+		}
+		// 五個ごとに改行を挟む
+		if((i % 5) == 0) { html += "<br />" }
+	}
+	html += "</div>";
+
+	$(idName).hide();
+	$(idName).prepend(html).fadeIn("fast");
 }
 
 /**
@@ -200,8 +253,8 @@ function addQuestion(idName)
 	var questinHTML = '<br />質問'+questionNum+' : <input type="text" name="q'+questionNum+'" onKeyPress="return checkEnter(event);" /><br />'+
 					  '質問タイプ : '+
 					  '<select name="qType'+questionNum+'" size="1" onchange="changSelect(this);">'+
-					  '<option value="1" label="チェックボックス（複数回答）">チェックボックス（複数回答）</option>'+
-					  '<option value="2" label="ラジオボックス（どれか1つ回答）">ラジオボックス（どれか1つ回答）</option>'+
+					  '<option value="1" label="チェックボッラジオクス（複数回答）">チェックボックス（複数回答）</option>'+
+					  '<option value="2" label="ラジオボタン（どれか1つ回答）">ラジオボタン（どれか1つ回答）</option>'+
 					  '<option value="3" label="自由回答（回答者が回答を書き込む）">自由回答（回答者が回答を書き込む）</option>'+
 					  '</select><br />'+
 					  '<div id="qType'+questionNum+'"></div>';
